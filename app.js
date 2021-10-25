@@ -1,7 +1,8 @@
 const express = require("express");
-const { ok } = require("assert");
+var cors = require("cors");
 
 const app = express();
+app.use(cors());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -20,6 +21,9 @@ const io = require("socket.io")(http, {
     methods: ["GET", "POST"],
   },
 });
+
+// Cliente
+const ioc = require("socket.io-client");
 
 const port = 2021;
 

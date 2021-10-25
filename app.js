@@ -64,7 +64,8 @@ app.get("/enviar_mensaje", (req, res) => {
 app.post("/enviar_mensaje", (req, res) => {
   console.log("Got body:", req.body);
   res.send("Mensaje: " + req.body.data);
-  socketOut.emit("Mensaje ASCP", req.body);
+  socketOut.emit("Mensaje ASCP", req.body.data);
+  io.emit("Mensaje ASCP", req.body.data);
 });
 
 // Obtener el último mensaje
@@ -76,9 +77,11 @@ app.get("/obtener_ultimo_mensaje", (req, res) => {
 io.on("connection", (socket) => {
   socket.on("Mensaje ASCP", (ascp_msg) => {
     console.log(socket.id + " " + JSON.stringify(ascp_msg));
+    io.emit("Mensaje ASCP", ascp_msg);
     mensajes.push(ascp_msg);
   });
 });
+
 // Escuchar en el puerto especificado en la línea de comandos
 http.listen(port, () => {
   console.log(`Escuchando en http://localhost:${port}/`);

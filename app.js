@@ -23,7 +23,7 @@ const io = require("socket.io")(http, {
 
 const port = 2021;
 
-var messages = [];
+var mensajes = [];
 
 // Se usa para ENVIAR mensajes
 var socketOut = null;

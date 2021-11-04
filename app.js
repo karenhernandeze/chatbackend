@@ -60,12 +60,20 @@ app.get("/enviar_mensaje", (req, res) => {
   socketOut.emit("Mensaje ASCP", req.query.msg);
 });
 
+// //Enviar mensaje al host al que se encuentra conectado
+// app.post("/enviar_mensaje", (req, res) => {
+//   console.log("Got body:", req.body);
+//   res.send("Mensaje: " + req.body.data);
+//   socketOut.emit("Mensaje ASCP", req.body.data);
+//   io.emit("Mensaje ASCP", req.body.data);
+// });
+
 //Enviar mensaje al host al que se encuentra conectado
 app.post("/enviar_mensaje", (req, res) => {
   console.log("Got body:", req.body);
   res.send("Mensaje: " + req.body.data);
-  socketOut.emit("Mensaje ASCP", req.body.data);
-  io.emit("Mensaje ASCP", req.body.data);
+  socketOut.emit("Mensaje ASCP", req.body);
+  io.emit("Mensaje ASCP", req.body);
 });
 
 // Obtener el último mensaje
